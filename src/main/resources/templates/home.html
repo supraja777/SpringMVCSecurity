@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Spring Security Demo</title>
+</head>
+<body>
+    Welcome to our home page!!!
+
+   <p>User: <span sec:authentication="principal.username"></span></p>
+    <br/>
+    <p>Roles: <span sec:authentication="principal.authorities"></span></p>
+
+
+    <br/>
+    <!--To display the below content for only managers -->
+    <div sec:authorize ="hasRole('MANAGER')">
+        <p>
+            <a th:href="@{/leaders}">Leaders Page --- This is only available for the managers!</a>
+        </p>
+    </div>
+
+
+    <br/>
+    <br>
+    <br>
+    <br/>
+    <!--To display the below content for only managers -->
+    <div sec:authorize ="hasRole('ADMIN')">
+        <p>
+            <a th:href="@{/systems}">Leaders Page --- This is only available for the admins!</a>
+        </p>
+    </div>
+    <br/>
+    <br>
+    <br>
+
+
+    <form th:action="@{/logout}" method="POST">
+        <input type="submit" value="logout">
+    </form>
+
+</body>
+</html>
